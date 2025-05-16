@@ -1,0 +1,23 @@
+name: Python Tests
+
+on: [push, pull_request] # Triggers on code push or PR
+
+jobs:
+  test:
+    runs-on: ubuntu-latest # Uses GitHub's Ubuntu runner
+
+    steps:
+      - uses: actions/checkout@v4 # Checks out your code
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11" # Specify your Python version
+
+      - name: Install dependencies
+        run: |
+          pip install -r req.txt
+          pip install pytest  # Installs pytest if not in requirements
+
+      - name: Run tests
+        run: pytest tests/ # Runs all tests in your tests folder
